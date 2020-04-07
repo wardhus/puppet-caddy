@@ -62,7 +62,7 @@ class caddy::config inherits caddy {
   }
 
   case $facts['os']['release']['major'] {
-    '7': {
+    '7', '8': {
       file {'/etc/systemd/system/caddy.service':
         ensure  => file,
         mode    => '0744',
@@ -73,11 +73,11 @@ class caddy::config inherits caddy {
         require => Class['caddy::package'],
       }
 
-      exec {'systemctl-daemon-reload':
-        refreshonly => true,
-        path        => '/usr/bin:/usr/sbin:/bin:/usr/local/bin',
+      ensure_resource('exec', 'systemctl-daemon-reload', {
         command     => 'systemctl daemon-reload',
-      }
+        refreshonly => true,
+        path        => $facts['path'],
+      })
     }
     '6': {
       file {'/etc/init.d/caddy':

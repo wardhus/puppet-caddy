@@ -80,7 +80,7 @@ Temp dir for caddy download
 
 ## Limitations
 
-Tested on Centos 6.8 and Centos 7.3.
+Tested on CentOS 6.8, CentOS 7.3 and CentOS 8.0.
 
 ## TODO
 
